@@ -2,18 +2,17 @@
 
 class log_in {
 
-    public function login()
-    {
-    
+    public function login() {
+
         require_once 'dbh.php';
-        
+
         try {
-           
+
             if (isset($_POST["submit"])) {
                 if (empty($_POST["Email"]) || empty($_POST["password"])) {
                     $message = '<label> All fields are required </label>';
                 } else {
-                   $obj = new Dbh;
+                    $obj = new Dbh;
                     $pdo = $obj->connect();
                     $query = $pdo->prepare("SELECT * FROM member WHERE Email = :Email AND password = :password");
 
@@ -25,8 +24,10 @@ class log_in {
                     );
                     $results = $query->fetchAll();
 
-
-                    if (count($results) == 1) {
+                    if (count($results) == 0) {
+                        echo 'user not found';
+                    }
+                    else if (count($results) == 1) {
                         $user = $results[0];
                         $_SESSION["Email"] = $user["Email"];
                         $_SESSION["permission"] = $user["permission"];
@@ -35,16 +36,14 @@ class log_in {
                             header('location:admin.php?loginsuccess');
                             break;
                         case 'user':
-                            header('location:user.php?loginsuccess');
+                            header('location:member.php?loginsuccess');
                             break;
                     }
                 }
-            } else {
-                echo 'no user found';
             }
         } catch (PDOException $error) {
             $message = $error->getMessage();
         }
     }
+
 }
-    

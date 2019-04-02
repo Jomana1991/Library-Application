@@ -1,26 +1,14 @@
 <?php
 session_start();
+require_once "classes/book.php";
+$new = new book;
 
 if (isset($_POST['submit'])) {
-    require_once "dbh2.php";
+    
+$new->searchbook();
 
-    try {
-        $connection = new PDO($dsn, $username, $password, $options);
-
-        $sql = "SELECT *
-    FROM bookTable
-    WHERE Title = :Title";
-
-        $Title = $_POST['Title'];
-
-        $statement = $connection->prepare($sql);
-        $statement->bindParam(':Title', $Title, PDO::PARAM_STR);
-        $statement->execute();
-
-        $result = $statement->fetchAll();
-    } catch (PDOException $error) {
-        echo $sql . "<br>" . $error->getMessage();
-    }
+   
+               
 }
 ?>
 
@@ -67,10 +55,7 @@ if (isset($_POST['submit'])) {
             <a href = 'index.php' >back to Home page </a>
         </div>
         <div>
-            <?php
-            if (isset($_POST['submit'])) {
-                if ($result && $statement->rowCount() > 0) {
-                    ?>
+           
 
                     <h2> Results </h2>
 
@@ -86,23 +71,18 @@ if (isset($_POST['submit'])) {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($result as $row) { ?>
+                           
                                 <tr>
-                                    <td><?php echo ($row["Book_ID"]); ?></td>
-                                    <td><?php echo ($row["Title"]); ?></td>
-                                    <td><?php echo ($row["Date_published"]); ?></td>
-                                    <td><?php echo ($row["ISBN"]); ?></td>
-                                    <td><?php echo ($row["No_of_Copies"]); ?></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
-                            <?php } ?>
+                          
                         </tbody>
                     </table>
-                    <?php
-                } else {
-                    echo "no results found for" . $_POST['Title'];
-                }
-            }
-            ?> 
+                    
         </div>
 
     </body>
