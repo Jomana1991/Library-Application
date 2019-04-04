@@ -69,7 +69,9 @@ if (isset($_POST['submit'])) {
                         <form  class="text-center border border-light p-5" action = "index.php" method="POST" >
                                                    
                             <input id="defaultLoginFormEmail" class="form-control mb-4" type ="text" name ="Email" placeholder ="email">
+                            <br>
                             <input id="defaultLoginFormPassword" class="form-control mb-4" type ="password" name ="password" placeholder ="password">
+                            <br>
                             <button class="btn btn-info btn-block my-4" type ="submit" name="submit"> login </button>
                             
                         </form>
@@ -86,6 +88,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="col-sm-6 text-center">
                         <h2> Don't have an account? sign up below! </h2>
+                         <br>
                         <button> <a href = 'signup.php' >Sign Up </a> </button>
                     </div>
                 </div>    
