@@ -2,9 +2,9 @@
 <?php
 session_start();
 
-require_once ('classes/log_in.php');
+require_once ('classes/person.php');
 
-$new = new log_in;
+$new = new person;
 
 if (isset($_POST['submit'])) {
 

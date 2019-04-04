@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "classes/sign_up.php";
-$new = new sign_up;
+require_once "classes/person.php";
+$new = new person;
 
 if (isset($_POST['submit'])) {
 
