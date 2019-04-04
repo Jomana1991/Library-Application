@@ -1,0 +1,100 @@
+html, body {
+    height: 100%;
+    width: 100%;
+
+}
+
+.navbar {
+    background-color: beige;
+    padding: 1% 20;
+    fontsize: 1.2em;
+
+}
+
+.navbar-brand {
+    min-height:55px;
+    padding:0 15px 5px;
+
+}
+
+.navbar-default .navbar-nav li a {
+    colour: black;
+}
+
+.navbar-default .navbar-nav li a:hover,  .navbar-default .navbar-nav li a:active{
+    colour: grey;
+}
+
+#home {
+    background: url(img/book2.jpeg) no-repeat center center fixed;
+    display: table;
+    height: 100%;
+    position:relative;
+    width: 100%;
+    background-size: cover;
+
+}
+.landing-text {
+    display: table-cell;
+    text-align: center;
+    vertical-align:middle;
+
+}
+.landing-text h1 {
+    font-size: 500%;
+    font-weight:700;
+
+}
+
+.padding {
+    padding: 80px 0;
+
+}
+.padding img {
+    width:100%;
+}
+
+footer {
+    width:100%;
+    background-color: beige;
+    color: black;
+    padding: 5% 5% 10% 5%;
+}
+
+.fa {
+    padding: 10%;
+    color: black;
+    font-size: 25px;
+}
+
+.fa:hover {
+    color: grey;
+    text-decoration: none;
+}
+
+#form {
+   position: none;
+}
+
+.col-sm-6 text-center {
+    position: 50%
+}
+/*    .form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+  padding: 20%;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+*/
