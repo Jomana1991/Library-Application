@@ -59,11 +59,17 @@ if (isset($_POST['submit'])) {
                   <div  class="col-md-4 col-md-offset-4">
                         <form class="text-center border border-light p-5" action=" " method="POST" >
                             <input id="defaultLoginFormEmail" class="form-control mb-4" type = 'text' name ='Firstname' placeholder="firstname">
+                            <br>
                             <input id="defaultLoginFormEmail" class="form-control mb-4" type = 'text' name ='Lastname' placeholder="lastname">
+                            <br>
                             <input id="defaultLoginFormEmail" class="form-control mb-4" type = 'text' name ='Age' placeholder="age">
+                            <br>
                             <input id="defaultLoginFormEmail" class="form-control mb-4" type = 'text' name ='Email' placeholder="email">
+                            <br>
                             <input id="defaultLoginFormEmail" class="form-control mb-4" type = 'text' name ='Streetaddress' placeholder="address">
+                            <br>
                             <input id="defaultLoginFormEmail" class="form-control mb-4" type = 'text' name ='Postcode' placeholder="Postcode">
+                            <br>
                             <input id="defaultLoginFormPassword" class="form-control mb-4" type = 'text' name ='password' placeholder="password">
 
                             <button class="btn btn-default" type ='submit' name="submit" >Submit</button>

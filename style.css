@@ -72,13 +72,20 @@ footer {
     text-decoration: none;
 }
 
+.btn btn-outline-secondary btn-lg {
+                                   width:30%;
+margin: 15px;
+}
+
 #form {
-   position: none;
+    position:none;
 }
 
 .col-sm-6 text-center {
-    position: 50%
+    position: 50%;
 }
+
+
 /*    .form-label-group {
   position: relative;
   margin-bottom: 1rem;

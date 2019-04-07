@@ -8,7 +8,6 @@ $new = new person;
 
 if (isset($_POST['submit'])) {
 
-
     $new->login();
 }
 ?>

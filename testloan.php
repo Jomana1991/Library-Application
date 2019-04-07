@@ -10,6 +10,7 @@ if (isset($_POST['request'])) {
         
          $sql2 = " INSERT INTO loan_Table (Stock_ID)
              SELECT Stock_ID FROM stockTable
+             where 
 inner join stockTable
 on bookTable.book_ID = stockTable.book_ID
 inner join LocationTable
@@ -19,6 +20,7 @@ ON bookTable.Title = '$book'
 Update stockTable
  INNER JOIN loan_Table on loan_Table.Stock_ID = stockTable.Stock_ID
 Set stock = stock -1
+Where 
 
 UPDATE BookTable
         INNER JOIN

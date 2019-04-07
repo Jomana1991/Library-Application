@@ -34,6 +34,7 @@ where firstname = ";
                         } catch (PDOException $error) {
                             echo $sql . "<br>" . $error->getMessage();
                         }
+                        
 }
 
 public function addmember () {

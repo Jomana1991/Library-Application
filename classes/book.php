@@ -11,12 +11,14 @@ class book {
     }
 
     public function searchbook() {
-        require_once "dbh.php";
-
-       try {
+        require "dbh.php";
+ 
+                        try {
                             $obj = new Dbh;
                             $pdo = $obj->connect();
-
+//        $sql = "SELECT *
+//    FROM bookTable
+//    WHERE Title = :Title";
                             $Title = $_POST['Title'];
 
                             $sql = "SELECT Title, stock, areaname
@@ -37,13 +39,6 @@ WHERE bookTable.Title = '$Title'";
                         } catch (PDOException $error) {
                             echo $sql . "<br>" . $error->getMessage();
                         }
-                         if (isset($_POST['search'])) {
-                            if ($result && $statement->rowCount() > 0) {
-                                foreach ($result as $row) {
-                                    
-    }
-                            }
-                         }
     }
 
     public function requestbook() {

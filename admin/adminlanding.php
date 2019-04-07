@@ -1,18 +1,6 @@
 <?php
 session_start();
-require_once "classes/admin.php";
-$new = new admin;
-
-if (isset($_POST['search'])) {
-
-    $new->searchmember();
-} else {
-    echo 'Sign-up failed';
-}
 ?>
-
-
-
 
 <html>
     <head>
@@ -22,8 +10,7 @@ if (isset($_POST['search'])) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
-
+        <link href="../style.css" rel="stylesheet" type="text/css"/>
         <title></title>
     </head>
     <body>
@@ -48,22 +35,37 @@ if (isset($_POST['search'])) {
             </div>
         </nav>
 
-
         <div id="home">
             <div class="landing-text">
                 <h1> Welcome Admin!</h1>
-                <h4> Search for a member below </h4>
-                <div  class="col-md-4 col-md-offset-4">
-                    <form class="text-center border border-light p-5" method="POST" >
-                        <label class="label label-default" for="Member">Member name</label>
-                        <input id="defaultLoginFormEmail" class="form-control mb-4" type ="text" name ="firstname" placeholder ="Membername">
+                <div >
+                    <button type= "button" onclick="searchFunction()" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">Search member</button>
 
-                        <button type ="submit" name="search"> Submit search </button>
-                    </form>
-                </div> 
-            </div>   
-        </div>
+                    <button type= "button" onclick="deleteFunction()" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">Delete member</button>
 
+                    <button type= "button" onclick="registerFunction()" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">register member</button>
+
+                    <button class="btn btn-outline-secondary btn-lg" style="width:30%; margin: 15px">Update book</button>
+
+                    <button class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">Add book</button>
+
+                    <button class="btn btn-outline-secondary btn-lg" style="width:30%; margin: 15px">remove book</button>
+
+                </div>
+            </div>
+
+        </div>   
+
+        <script type="text/javascript" >
+            function searchFunction() {
+                location.href = "adminsearch.php";
+            }
+            function registerFunction() {
+                location.href = "../signup.php";
+            }
+            ;
+        </script>
 
     </body>
+
 </html>

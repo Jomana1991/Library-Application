@@ -56,57 +56,55 @@ session_start();
                     </form>
                 </div> 
                 <div class="col-md-4 col-md-offset-4">
-                    <?php
-                    if (isset($_POST['search'])) {
-                        require_once "classes/dbh.php";
-                        try {
-                            $obj = new Dbh;
-                            $pdo = $obj->connect();
-//        $sql = "SELECT *
-//    FROM bookTable
-//    WHERE Title = :Title";
-                            $Title = $_POST['Title'];
 
-                            $sql = "SELECT Title, stock, areaname
-from bookTable
-inner join stockTable
-on bookTable.book_ID=stockTable.book_ID
-inner join LocationTable
-on LocationTable.Location_ID=stockTable.Location_ID
-WHERE bookTable.Title = '$Title'";
+                    <h2>Results</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="margin: 10px; padding: 15px;" >Book name</th>
+                                <th style="margin: 10px; padding: 15px;" >Number of copies</th>
+                                <th style="margin: 10px; padding: 15px;">Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (isset($_POST['search'])) {
+                                require_once "classes/dbh.php";
+                                try {
+                                    $obj = new Dbh;
+                                    $pdo = $obj->connect();
 
+                                    $Title = $_POST['Title'];
 
+                                    $sql = "SELECT Title, stock, areaname
+                                    from bookTable
+                                    inner join stockTable
+                                    on bookTable.book_ID=stockTable.book_ID
+                                    inner join LocationTable
+                                    on LocationTable.Location_ID=stockTable.Location_ID
+                                    WHERE bookTable.Title = '$Title'";
 
-                            $statement = $pdo->prepare($sql);
-                            $statement->bindParam(':Title', $Title, PDO::PARAM_STR);
-                            $statement->execute();
+                                    $statement = $pdo->prepare($sql);
+                                    
+                                    $statement->execute();
 
-                            $result = $statement->fetchAll();
-                        } catch (PDOException $error) {
-                            echo $sql . "<br>" . $error->getMessage();
-                        }
+                                    $result = $statement->fetchAll();
+                                } catch (PDOException $error) {
+                                    echo $sql . "<br>" . $error->getMessage();
+                                }
 
-                        if (isset($_POST['search'])) {
-                            if ($result && $statement->rowCount() > 0) {
-                                foreach ($result as $row) {
-                                    ?>
-                                    <h2>Results</h2>
-                                    <table>
-                                        <thead>
+                                if (isset($_POST['search'])) {
+                                    if ($result && $statement->rowCount() > 0) {
+                                        foreach ($result as $row) {
+                                            ?>
                                             <tr>
-                                                <th>Book name</th>
-                                                <th>Number of copies</th>
-                                                <th>Location</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td><?php echo ($row["Title"]) . " "; ?></td>
+                                                <td><?php echo ($row["Title"]); ?></td>
                                                 <td><?php echo ($row["stock"]); ?></td>
                                                 <td><?php echo ($row["areaname"]); ?></td>
                                                 <td><form action=" " method="POST" >
-                                                        <input type="hidden" name="areaname">
+                                                        <input type="hidden" name="areaname" value ="<?php echo ($row["areaname"]); ?>">
+                                                        <input type="hidden" name="stock" value ="<?php echo ($row["stock"]); ?>">
+                                                        <input type="hidden" name="Title" value ="<?php echo ($row["Title"]); ?>">
                                                         <button value = "Title" type ="submit" name="request"> request book </button> 
                                                     </form></td>
                                             </tr>
@@ -124,7 +122,32 @@ WHERE bookTable.Title = '$Title'";
                 </div> 
             </div>   
         </div>
+        <?php
+        if (isset($_POST['request'])) {
+            require_once "classes/dbh.php";
+            $email = $_SESSION ["Email"];
+            try {
+                $obj = new Dbh;
+                $pdo = $obj->connect();
+                $book = $_POST["Title"];
+                $stock = $_POST["stock"];
+                $location = $_POST["areaname"];
 
-
+                $sql2 = "CALL bookloan ('$email', '$location', '$book', '$stock')";
+                $result2 = $statement2 = $pdo->prepare($sql2);
+                $statement2->execute();
+            } catch (PDOException $error) {
+                echo $sql2 . "<br>" . $error->getMessage();
+            }
+            if ($result2 && $statement2) { ?>
+      <div class ="container-fuild" >    
+        <h3>  <?php echo 'your request has been submitted!'; ?> </h3>
+      </div>
+        <?php
+            }
+            
+        }
+        ?>
     </body>
+    
 </html>
