@@ -41,10 +41,10 @@ session_start();
 
 
                 <h4> Welcome <?php
-                    if (isset($_SESSION ["Email"])) {
-                        echo "" . $_SESSION ["Email"] . ",";
-                    }
-                    ?>  please search for your book below
+if (isset($_SESSION ["Email"])) {
+    echo "" . $_SESSION ["Email"] . ",";
+}
+?>  please search for your book below
 
                 </h4>
                 <div  class="col-md-4 col-md-offset-4">
@@ -69,85 +69,53 @@ session_start();
                         <tbody>
                             <?php
                             if (isset($_POST['search'])) {
-                                require_once "classes/dbh.php";
-                                try {
-                                    $obj = new Dbh;
-                                    $pdo = $obj->connect();
+                                require_once "classes/book.php";
+                                $book = new Book;
+                                $searchResult = $book->searchbook();
 
-                                    $Title = $_POST['Title'];
+                                if ($searchResult) {
+                                    foreach ($searchResult as $row) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo ($row["Title"]); ?></td>
+                                            <td><?php echo ($row["stock"]); ?></td>
+                                            <td><?php echo ($row["areaname"]); ?></td>
+                                            <td><form action=" " method="POST" >
+                                                    <input type="hidden" name="areaname" value ="<?php echo ($row["areaname"]); ?>">
+                                                    <input type="hidden" name="stock" value ="<?php echo ($row["stock"]); ?>">
+                                                    <input type="hidden" name="Title" value ="<?php echo ($row["Title"]); ?>">
+                                                    <button value = "Title" type ="submit" name="request"> request book </button> 
+                                                </form></td>
+                                        </tr>
 
-                                    $sql = "SELECT Title, stock, areaname
-                                    from bookTable
-                                    inner join stockTable
-                                    on bookTable.book_ID=stockTable.book_ID
-                                    inner join LocationTable
-                                    on LocationTable.Location_ID=stockTable.Location_ID
-                                    WHERE bookTable.Title = '$Title'";
-
-                                    $statement = $pdo->prepare($sql);
-                                    
-                                    $statement->execute();
-
-                                    $result = $statement->fetchAll();
-                                } catch (PDOException $error) {
-                                    echo $sql . "<br>" . $error->getMessage();
-                                }
-
-                                if (isset($_POST['search'])) {
-                                    if ($result && $statement->rowCount() > 0) {
-                                        foreach ($result as $row) {
-                                            ?>
-                                            <tr>
-                                                <td><?php echo ($row["Title"]); ?></td>
-                                                <td><?php echo ($row["stock"]); ?></td>
-                                                <td><?php echo ($row["areaname"]); ?></td>
-                                                <td><form action=" " method="POST" >
-                                                        <input type="hidden" name="areaname" value ="<?php echo ($row["areaname"]); ?>">
-                                                        <input type="hidden" name="stock" value ="<?php echo ($row["stock"]); ?>">
-                                                        <input type="hidden" name="Title" value ="<?php echo ($row["Title"]); ?>">
-                                                        <button value = "Title" type ="submit" name="request"> request book </button> 
-                                                    </form></td>
-                                            </tr>
-
-                                            <?php
-                                        }
+                                        <?php
                                     }
                                 }
-                                ?>
-                            </tbody>
-                        </table>
-                        <?php
-                    }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php
                     ?>
                 </div> 
             </div>   
         </div>
-        <?php
-        if (isset($_POST['request'])) {
-            require_once "classes/dbh.php";
-            $email = $_SESSION ["Email"];
-            try {
-                $obj = new Dbh;
-                $pdo = $obj->connect();
-                $book = $_POST["Title"];
-                $stock = $_POST["stock"];
-                $location = $_POST["areaname"];
-
-                $sql2 = "CALL bookloan ('$email', '$location', '$book', '$stock')";
-                $result2 = $statement2 = $pdo->prepare($sql2);
-                $statement2->execute();
-            } catch (PDOException $error) {
-                echo $sql2 . "<br>" . $error->getMessage();
+<?php
+if (isset($_POST['request'])) {
+    
+    require_once "classes/book.php";
+    $book = new Book;
+    $requestResult = $book->requestbook();
+    
+    if ($requestResult) {
+        ?>
+                <div class ="container-fuild" >    
+                    <h3>  <?php echo 'your request has been submitted!'; ?> </h3>
+                </div>
+                <?php
             }
-            if ($result2 && $statement2) { ?>
-      <div class ="container-fuild" >    
-        <h3>  <?php echo 'your request has been submitted!'; ?> </h3>
-      </div>
-        <?php
-            }
-            
         }
         ?>
     </body>
-    
+
 </html>

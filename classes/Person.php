@@ -60,7 +60,7 @@ public function signup () {
                         $_SESSION["permission"] = $user["permission"];
                     } switch ($user['permission']) {
                         case 'Admin':
-                            header('location:admin.php?loginsuccess');
+                            header('location:admin/adminlanding.php?loginsuccess');
                             break;
                         case 'user':
                             header('location:member.php?loginsuccess');

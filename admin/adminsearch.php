@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 
 
@@ -43,7 +44,7 @@ session_start();
             <div class="landing-text">
                 <h1> Welcome Admin!</h1>
                 <h4> Search for a member by Firstname, Lastname or Member ID below </h4>
-                <div  class="col-md-2 col-md-offset-2">
+                 <div  class="col-md-4 col-md-offset-4">
                     <form class="text-center border border-light p-5" method="POST" >
 <!--                        <input list="Search">
                         <datalist id="Searchmember">
