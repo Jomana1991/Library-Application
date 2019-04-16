@@ -1,10 +1,6 @@
 <?php
 session_start();
-
 ?>
-
-
-
 
 <html>
     <head>
@@ -42,64 +38,45 @@ session_start();
 
         <div id="home">
             <div class="landing-text">
+              <div class ="searchmember">
                 <h1> Welcome Admin!</h1>
                 <h4> Search for a member by Firstname, Lastname or Member ID below </h4>
-                 <div  class="col-md-4 col-md-offset-4">
+                <div  class="col-md-4 col-md-offset-4">
                     <form class="text-center border border-light p-5" method="POST" >
-<!--                        <input list="Search">
-                        <datalist id="Searchmember">
-                            <option value="Firstname">
-                            <option value="Lastname">
-                            <option value="Member_ID">
-                        </datalist> -->
-<!--                        <select name="search">
-                            <option value="Firstname">Firstname</option>
-                            <option value="Lastname">Lastname</option>
-                            <option value="Member_ID">Member_ID</option>
-                        </select>-->
+
                         <input class="form-control mb-4" type ="text" name ="searchmember" placeholder ="search for member">
-                        <button type ="submit" name="search"> Submit search </button>
+                        <button class="SM" type ="submit" name="search"> Submit search </button>
                     </form>
-                    <div class="col-md-4 col-md-offset-4">
+               
+                </div>
+                                       </div>
+        
+
+                
+                    <div id ="results" class="col-md-4 col-md-offset-4">
 
                         <h2>Results</h2>
                         <table>
                             <thead>
                                 <tr>
-                                    <th style="margin: 10px; padding: 30px;">Firstname</th>
-                                    <th style="margin: 10px; padding: 30px;" >Lastname</th>
-                                    <th style="margin: 10px; padding: 30px;">Age</th>
-                                    <th style="margin: 10px; padding: 30px;">Email</th>
-                                    <th style="margin: 10px; padding: 30px;">Street Address</th>
-                                    <th style="margin: 10px; padding: 30px;">Postcode</th>
-                                    <th style="margin: 10px; padding: 30px;">Join date</th>
+                                    <th style="margin: 30px; padding: 30px;">Firstname</th>
+                                    <th style="margin: 30px; padding: 30px;" >Lastname</th>
+                                    <th style="margin: 30px; padding: 30px;">Age</th>
+                                    <th style="margin: 30px; padding: 30px;">Email</th>
+                                    <th style="margin: 30px; padding: 30px;">Street Address</th>
+                                    <th style="margin: 30px; padding: 30px;">Postcode</th>
+                                    <th style="margin: 30px; padding: 30px;">Join date</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 require_once "../classes/admin.php";
-                                $new = new admin;
-
-                                if (isset($_POST['search'])) {
-                                    require_once "../classes/dbh.php";
-                                    try {
-                                        $obj = new Dbh;
-                                        $pdo = $obj->connect();
-                                    $search = $_POST['searchmember'];
-
-
-                                        $sql = "SELECT Firstname,Lastname, Age, Email, Streetaddress, Postcode,joindate from member
-                                        where firstname = '$search' OR lastname = '$search' OR Member_ID = '$search' ";
-                                        $statement = $pdo->prepare($sql);
-                                        $statement->execute();
-
-                                        $result = $statement->fetchAll();
-                                    } catch (PDOException $error) {
-                                        echo $sql . "<br>" . $error->getMessage();
-                                    }
-                                }
-                                if (isset($_POST['search'])) {
-                                    if ($result && $statement->rowCount() > 0) {
+                                $admin = new admin;
+                                $result = $admin-> searchmember ();
+                              
+                                if (isset($_POST['searchmember'])) {
+                                   
+                                    if ($result) {
                                         foreach ($result as $row) {
                                             ?>
 
@@ -123,11 +100,23 @@ session_start();
                             </tbody>
                         </table>
 
-                    </div>         
+                    </div>    
                 </div> 
             </div>   
-        </div>
+        
 
+ <script type="text/javascript" >
+          
+           
+ $(document).ready(function(){
+     event.preventDefault();
+    $(".SM").click(function(){ 
+         $('.searchmember').hide();
+       $('.results').show();
+   
+    });
+ });
 
+        </script>
     </body>
 </html>

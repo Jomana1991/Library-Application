@@ -107,7 +107,7 @@ if (isset($_POST['request'])) {
     $book = new Book;
     $requestResult = $book->requestbook();
     
-    if ($requestResult) {
+    if ($requestResult == 1) {
         ?>
                 <div class ="container-fuild" >    
                     <h3>  <?php echo 'your request has been submitted!'; ?> </h3>

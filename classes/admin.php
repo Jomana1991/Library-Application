@@ -19,23 +19,23 @@ public function deletemember () {
 }
 
 public function searchmember () {
-    
+    require_once "../admin/adminsearch.php";
    
- try {
-        $connection = new PDO($dsn, $username, $password, $options);
+                                    try {
+                                        $obj = new Dbh;
+                                        $pdo = $obj->connect();
+                                        $search = $_POST['searchmember'];
+                                        $sql = "SELECT Firstname,Lastname, Age, Email, Streetaddress, Postcode,joindate from member
+                                        where firstname = '$search' OR lastname = '$search' OR Member_ID = '$search' ";
+                                        $statement = $pdo->prepare($sql);
+                                        $statement->execute();
 
-  $sql =      "SELECT * from member
-where firstname = ";
-      $statement = $pdo->prepare($sql);
-                            $statement->bindParam(':Title', $Title, PDO::PARAM_STR);
-                            $statement->execute();
-
-                            $result = $statement->fetchAll();
-                        } catch (PDOException $error) {
-                            echo $sql . "<br>" . $error->getMessage();
-                        }
-                        
-}
+                                        $result = $statement->fetchAll();
+                                        return $result;
+                                    } catch (PDOException $error) {
+                                        echo $sql . "<br>" . $error->getMessage();
+                                    }
+                                }
 
 public function addmember () {
     

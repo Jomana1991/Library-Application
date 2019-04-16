@@ -38,41 +38,32 @@ session_start();
         <div id="home">
             <div class="landing-text">
                 <h1> Welcome Admin!</h1>
-                <span class="clicked">
+                <span >
                     
-                    <button id="clickme" type= "button" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">Search member</button>
+                    <button  type= "button" onclick="searchFunction()" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">Search member</button>
 
-                    <button id="clickme" type= "button" onclick="deleteFunction()" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">Delete member</button>
+                    <button type= "button" onclick="deleteFunction()" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">Delete member</button>
 
-                    <button  id="clickme"type= "button" onclick="registerFunction()" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">register member</button>
+                    <button  type= "button" onclick="registerFunction()" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">register member</button>
 
-                    <button  id="clickme"class="btn btn-outline-secondary btn-lg" style="width:30%; margin: 15px">Update book</button>
+                    <button  class="btn btn-outline-secondary btn-lg" style="width:30%; margin: 15px">Update book</button>
 
-                    <button id="clickme" class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">Add book</button>
+                    <button  class="btn btn-outline-secondary btn-lg"  style="width:30%; margin: 15px">Add book</button>
 
-                    <button id="clickme" class="btn btn-outline-secondary btn-lg" style="width:30%; margin: 15px">remove book</button>
+                    <button  class="btn btn-outline-secondary btn-lg" style="width:30%; margin: 15px">remove book</button>
 
                 </span>
-            <div class="search" style="display:none">             
-                <h4> Search for a member by Firstname, Lastname or Member ID below </h4>
-                <div  class="col-md-4 col-md-offset-4">
-                    <form class="text-center border border-light p-5" method="POST" >
-
-                        <input class="form-control mb-4" type ="text" name ="searchmember" placeholder ="search for member">
-                        <button type ="submit" name="search"> Submit search </button>
-                    </form>
-                </div>
-</div>
+          
+                               
+                
 </div> 
 </div> 
         <script type="text/javascript" >
-            $(document).ready(function(){
-    $("#clickme").click(function(){
-        $('.clicked').hide();
-       $('.search').show();
-    });
- });
-//           
+     
+ function searchFunction() {
+                location.href = "./adminsearch.php";
+            }
+            ;
             function registerFunction() {
                 location.href = "../signup.php";
             }
